@@ -4,7 +4,7 @@ This is a challenge from my school website about web penetration testing
 
 ## Web First Look:
 
-![image-20240823233654124](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240823233654124.png)
+![image-20240823233654124](images/1.png)
 
 When I press the button, it transfer me to 1.php
 
