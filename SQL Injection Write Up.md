@@ -108,4 +108,4 @@ sqlmap -u "http://10.214.160.13:10002/?questionid=1" -D aaa_web2 -T flag_is_here
 
 And we receive the flag.
 
-**flag: AAA{welc0me_to_AAA_Congratu1ationS_qq_group_386796080}**
+**flag: AAA{welc0me_to_AAA_Congratu1ationS_qq_group_********}**   ******** is hidden privacy purpose
