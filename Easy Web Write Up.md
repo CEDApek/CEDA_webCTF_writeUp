@@ -47,22 +47,22 @@ We are now at the 3rd level of the challenge, let's press the button,
 
 Nothing suspicious going around, Let's check the network tab
 
-![image-20240823233721805](images/13.png)
+![image-20240823233721805](images/14.png)
 
 Yeah, there is one more php page going around (wozaizheli.php)
 
-![image-20240823233721805](images/14.png)
+![image-20240823233721805](images/15.png)
 
 now it ask us to press the button that dissapeared, well one way to brute force this is by changing the html code
 
-![image-20240823233721805](images/15.png)
+![image-20240823233721805](images/16.png)
 
 here by changing the id to something else, the script won't effect the div block so the button won't disappear
 
-![image-20240823233721805](images/16.png)
+![image-20240823233721805](images/17.png)
 
 changing the idea worked and now we can just press the button to obtain the flag
 
-![image-20240823233721805](images/17.png)
+![image-20240823233721805](images/18.png)
 
 flag : AAA{y0u_2a_g0od_front-end_Web_developer}
