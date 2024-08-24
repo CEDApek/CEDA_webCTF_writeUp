@@ -3,7 +3,7 @@
 For this challenge, it asks us to do a sql injection to a form 
 ## Web First Look :
 
-![image-20240824230451725](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240824230451725.png)
+![image-20240824230451725](images/20.png)
 
 ```mysql
 $query_string = "SELECT * FROM melody_bu_shi_ji_lao WHERE id = " . $_GET['questionid'];
@@ -11,7 +11,7 @@ $query_string = "SELECT * FROM melody_bu_shi_ji_lao WHERE id = " . $_GET['questi
 
 After seing this, I'm testing the most basic injection that is **1 or 1=1** and It printed out all 0-7 output
 
-![21](C:\Users\ASUS\Desktop\Write Ups\images\21.png)
+![image-20240824230451725](images/21.png)
 
 For the next step I then try to inject the time base attack and it work out with this format
 
@@ -84,7 +84,7 @@ while True:
 
 After running this code, we can see the database name
 
-![image-20240824231049086](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240824231049086.png)
+![image-20240824230451725](images/22.png)
 
 data base name is **aaa_web2**, let's use sql map to retreive the data inside the database, the website gives us clues where the flag is hidden inside the flag_is_here table, 
 
@@ -96,7 +96,7 @@ sqlmap -u "http://10.214.160.13:10002/?questionid=1" -D aaa_web2 -T flag_is_here
 
 after running this command on terminal, 
 
-![image-20240824231353042](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240824231353042.png)
+![image-20240824230451725](images/23.png)
 
 We extracted 3 column, and now let's extract the column value of flag
 
@@ -104,7 +104,7 @@ We extracted 3 column, and now let's extract the column value of flag
 sqlmap -u "http://10.214.160.13:10002/?questionid=1" -D aaa_web2 -T flag_is_here -C flag --dump
 ```
 
-![image-20240824231509400](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240824231509400.png)
+![image-20240824230451725](images/24.png)
 
 And we receive the flag.
 
