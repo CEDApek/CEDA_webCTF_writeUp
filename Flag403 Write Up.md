@@ -61,3 +61,7 @@ and the flag is
 Flag: **AAA{flag_ix2mkbPEX3bmkHSB_gitcrypt_is_not_that_secure_qqgroup_~~}**
 
 ~~ is for privacy purpose
+
+
+
+<https://dev.to/heroku/how-to-manage-your-secrets-with-git-crypt-56ih>
