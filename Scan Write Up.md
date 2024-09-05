@@ -41,7 +41,7 @@ after using **curl** command I found this:
 proxychains4 curl http://192.168.192.8:10822
 ```
 
-![image-20240904105959756](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240904105959756.png)
+![image-20240904104757920](images/41.png)
 
 here is the formated output:
 
@@ -96,11 +96,11 @@ proxychains4 dirbuster
 
 the process while running the dirbuter:
 
-![image-20240904152352465](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240904152352465.png)
+![image-20240904104757920](images/42.png)
 
 after further directory searching, here is some of the result before finding the real flag:
 
-![image-20240905150459519](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240905150459519.png)
+![image-20240904104757920](images/43.png)
 
 List of directory found : <http://192.168.192.8:10822> this is the curl result 
 
@@ -300,7 +300,7 @@ proxychains4 curl -O http://192.168.192.8:10822/a4/A4toCDbox.jpg
 
 it shows a picture with no clue related to the flag (after further steg apporach) :
 
-![A4toCDbox](C:\Users\ASUS\Downloads\A4toCDbox.jpg)
+![image-20240904104757920](images/44.png)
 
 * /bonus/index.html
 
@@ -327,7 +327,7 @@ proxychains4 curl -O http://192.168.192.8:10822/bonus/20150723_170940.jpg
 
 retrieved:
 
-![20150723_170940](C:\Users\ASUS\Downloads\20150723_170940.jpg)
+![image-20240904104757920](images/45.png)
 
 * /phpmyadmin/index.html
 
