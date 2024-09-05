@@ -300,7 +300,7 @@ proxychains4 curl -O http://192.168.192.8:10822/a4/A4toCDbox.jpg
 
 it shows a picture with no clue related to the flag (after further steg apporach) :
 
-![image-20240904104757920](images/44.png)
+![image-20240904104757920](images/44.jpg)
 
 * /bonus/index.html
 
@@ -327,7 +327,7 @@ proxychains4 curl -O http://192.168.192.8:10822/bonus/20150723_170940.jpg
 
 retrieved:
 
-![image-20240904104757920](images/45.png)
+![image-20240904104757920](images/45.jpg)
 
 * /phpmyadmin/index.html
 
