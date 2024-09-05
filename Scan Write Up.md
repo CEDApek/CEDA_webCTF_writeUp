@@ -31,7 +31,7 @@ after running
 proxychains4 nmap -p 9000-11000 -vv 192.168.192.3
 ```
 
-![image-20240904104757920](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240904104757920.png)
+![image-20240904104757920](images/40.png)
 
 we found out that port 10822 is open
 
