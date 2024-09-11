@@ -4,7 +4,7 @@ This is my school CTF challenge
 
 ## Web first look:
 
-![image-20240905233221271](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240905233221271.png)
+![image-20240905233221271](images/46.png)
 
 Our task is clear, when we deal with a file upload, we should try to search directory for the file upload,
 
@@ -14,7 +14,7 @@ after running the
 dirsearch -u http://10.214.160.13:10001
 ```
 
-![47](C:\Users\ASUS\Desktop\Write Ups\images\47.png)
+![image-20240905233221271](images/47.png)
 
 I retrieved some directory from the website such as **file.php** and **flag.php** but currently two of them dont contain any use yet
 
@@ -67,9 +67,9 @@ Files are are served with specific MIME types based on their extensions
 After seing the mime types I tried to upload an image file (.png)
 
 and succesfully uploaded it: 
-![image-20240909200806641](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240909200806641.png)
+![image-20240905233221271](images/48.png)
 
-![image-20240909200839307](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240909200839307.png)
+![image-20240905233221271](images/49.png)
 
 the image showed up after uploading
 
@@ -95,7 +95,7 @@ after acessing the malicious double extention trojan horse through the vulnurabl
 http://10.214.160.13:10001/index.php?f=upload/20240911920984.png
 ```
 
-![image-20240911104947530](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240911104947530.png)	
+![image-20240905233221271](images/50.png)
 
 after confirming the injected php, next we upload a cmd to operate remote code control **RCE**
 
@@ -115,7 +115,7 @@ and edit after uploading it try calling the cmd like this :
 http://10.214.160.13:10001/index.php?f=upload/20240911418852.png&cmd=ls
 ```
 
-![image-20240911105455428](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240911105455428.png)
+![image-20240905233221271](images/51.png)
 
 and it listed all the .php file in the directory, next we **cat** the flag.php file and inspect the element inside it
 
@@ -123,7 +123,7 @@ and it listed all the .php file in the directory, next we **cat** the flag.php f
 http://10.214.160.13:10001/index.php?f=upload/20240911418852.png&cmd=cat%20flag.php
 ```
 
-![52](C:\Users\ASUS\Desktop\Write Ups\images\52.png)
+![image-20240905233221271](images/52.png)
 
 and we receive the flag contained inside it
 
