@@ -8,7 +8,7 @@
 
 ## Web First Look:
 
-![image-20240912003139430](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240912003139430.png)
+![image-20240912003139430](images/53.png)
 
 Tomcat has a management interface that is usually available at :
 
@@ -16,7 +16,7 @@ Tomcat has a management interface that is usually available at :
 http://10.214.160.13:10007/manager/html
 ```
 
-![image-20240912003412965](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240912003412965.png)
+![image-20240912003139430](images/54.png)
 
 After curling the html I found this:
 
@@ -94,7 +94,7 @@ So the next step was by using the nmap to check the port:
 nmap -sV -p 10007 --script=http-server-header,http-title 10.214.160.13
 ```
 
-![55](C:\Users\ASUS\Desktop\Write Ups\images\55.png)
+![image-20240912003139430](images/55.png)
 
 here, it just confirms us that the website is using ***Apache Tomcat / Coyote JSP engine 1.1***
 
@@ -104,7 +104,7 @@ After running nikto:
 nikto -h http://10.214.160.13:10007
 ```
 
-![image-20240913202459988](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240913202459988.png)
+![image-20240912003139430](images/56.png)
 
 After running hydra to brute force the tomcat:
 
@@ -114,11 +114,11 @@ hydra -L tomcat-users.txt -P tomcat-password.txt http-get://10.214.160.13:10007/
 
 
 
-![image-20240913212426775](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240913212426775.png)
+![image-20240912003139430](images/57.png)
 
 turns out it is ***tomcat:tomcat***
 
-![image-20240913212538442](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240913212538442.png)
+![image-20240912003139430](images/58.png)
 
 and now we are inside the Tomcat Web Application Manager:
 
@@ -150,11 +150,11 @@ InputStreamReader(p.getInputStream()));
 
 This code is intended to inject a Web Shell Code, but first we need to convert it to a **WAR** file using the jar command,
 
-![image-20240913220241060](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240913220241060.png)
+![image-20240912003139430](images/59.png)
 
 We now have the **webshell.war** file, next we uploaded in the web application manager
 
-![image-20240913220347886](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240913220347886.png)
+![image-20240912003139430](images/60.png)
 
 After uploading, let's directly access the url 
 
