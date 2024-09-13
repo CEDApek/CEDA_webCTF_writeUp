@@ -118,7 +118,7 @@ hydra -L tomcat-users.txt -P tomcat-password.txt http-get://10.214.160.13:10007/
 
 turns out it is ***tomcat:tomcat***
 
-![image-20240912003139430](images/58.png)
+![image-20240912003139430](images/61.png)
 
 and now we are inside the Tomcat Web Application Manager:
 
@@ -150,11 +150,11 @@ InputStreamReader(p.getInputStream()));
 
 This code is intended to inject a Web Shell Code, but first we need to convert it to a **WAR** file using the jar command,
 
-![image-20240912003139430](images/59.png)
+![image-20240912003139430](images/58.png)
 
 We now have the **webshell.war** file, next we uploaded in the web application manager
 
-![image-20240912003139430](images/60.png)
+![image-20240912003139430](images/59.png)
 
 After uploading, let's directly access the url 
 
@@ -172,7 +172,7 @@ cat conf/tomcat-users.xml
 
 we can access where the flag is hidden:
 
-![image-20240913220547121](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20240913220547121.png)
+![image-20240912003139430](images/60.png)
 
 After further inspection I found the flag inside the inspect source tab hidden in the role tag
 
