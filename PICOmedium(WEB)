@@ -198,5 +198,6 @@ base on :
 
 2). "I Don't trust users from other site" :arrow_right: add `Referer` with the same website
 
-3). "Sorry, this site only worked in 2018." :arrow_right: 
+3). "Sorry, this site only worked in 2018." :arrow_right: add `Date` with "Sat, 01 Dec 2018 12:00:00 GMT" as long as the year 2018 is still there
 
+4). ""
